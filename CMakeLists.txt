@@ -9,4 +9,8 @@ include_directories(${SDL2_INCLUDE_DIRS})
 
 ADD_SUBDIRECTORY(./src ../bin)
 
-target_link_libraries(boids ${SDL2_LIBRARIES})
+find_package(OpenMP)
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(boids PUBLIC ${SDL2_LIBRARIES}  OpenMP::OpenMP_CXX)
+endif()
+
