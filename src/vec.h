@@ -100,6 +100,13 @@ struct vec
     return output;
   }
   
+  vec<T, n> operator +=(const vec<T,n>& rhs){
+    for(int i = 0; i < n; i++){this.x[i] = this.x[i] + rhs.x[i];}
+  }
+
+  vec<T, n> operator -=(const vec<T,n>& rhs){
+    for(int i = 0; i < n; i++){this.x[i] = this.x[i] - rhs.x[i];}
+  }
 
   double magnitude(){
     double sum = 0;
