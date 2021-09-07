@@ -5,17 +5,27 @@
 #include "boids.h"
 #include "vec.h"
 
-#include<math.h>
-#define pi 3.142857
 
-void myInit (void)
-{
+
+boid* the_boids;
+const int BOIDS_COUNT = 100;
+
+const float WORLD_X_MIN = -20;
+const float WORLD_X_MAX = 20;
+
+const float WORLD_Y_MIN = -11.25;
+const float WORLD_Y_MAX = 11.25;
+
+void init(){
+
+    the_boids = new boid[BOIDS_COUNT];
+    randomize_boids(the_boids, BOIDS_COUNT, WORLD_X_MIN, WORLD_X_MAX, WORLD_Y_MIN, WORLD_Y_MAX);
     // making background color black as first
     // 3 arguments all are 0.0
     glClearColor(0.0, 0.0, 0.0, 1.0);
      
     // making picture color green (in RGB mode), as middle argument is 1.0
-    glColor3f(0.0, 1.0, 0.0);
+    glColor3f(1.0, 0.0, 0.0);
      
     // breadth of picture boundary is 1 pixel
     glPointSize(1.0);
@@ -23,35 +33,23 @@ void myInit (void)
     glLoadIdentity();
      
     // setting window dimension in X- and Y- direction
-    gluOrtho2D(-780, 780, -420, 420);
+    gluOrtho2D(WORLD_X_MIN, WORLD_X_MAX, WORLD_Y_MIN, WORLD_Y_MAX);
 }
- 
-void display (void)
-{
-    glClear(GL_COLOR_BUFFER_BIT);
-    glBegin(GL_POINTS);
-    float x, y, i;
-     
-    // iterate y up to 2*pi, i.e., 360 degree
-    // with small increment in angle as
-    // glVertex2i just draws a point on specified co-ordinate
-    while(true){
-        for ( i = 0; i < (2 * pi); i += 0.001)
-        {
-            glClear(GL_COLOR_BUFFER_BIT);
-            glBegin(GL_POINTS);
-            // let 200 is radius of circle and as,
-            // circle is defined as x=r*cos(i) and y=r*sin(i)
-            x = 200 * cos(i);
-            y = 200 * sin(i);
-         
-            glVertex2i(x, y);
-        }
-        glEnd();
-        glFlush();
-    }
-    glEnd();
-    glFlush();
+
+void display(){
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    draw_boids(the_boids, BOIDS_COUNT, .5);
+    
+    
+    glutSwapBuffers();
+}
+
+void update(){
+    influence_boids(the_boids, BOIDS_COUNT, .01);
+    move_boids(the_boids, BOIDS_COUNT, .01, WORLD_X_MIN, WORLD_X_MAX, WORLD_Y_MIN, WORLD_Y_MAX);
+    glutPostRedisplay();
 }
 
 #endif //SDL_FUNC_H
