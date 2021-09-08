@@ -2,7 +2,7 @@
 
 ## Dependencies
 
-g++, CMake, and SDL2
+g++, CMake, OpenGL, and GLUW 
 
 ## Running the code
 
