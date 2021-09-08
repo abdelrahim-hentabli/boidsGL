@@ -4,6 +4,8 @@
 #include "vec.h"
 #include <math.h>
 #include <random>
+#include <assert.h>
+#include "constants.h"
 
 struct boid{
     vec2 position;
@@ -27,7 +29,7 @@ void randomize_boids(boid* boids, int size, float x_min, float x_max, float y_mi
 }
 
 void move_boids(boid* boids, int size, double timeStep, float x_min, float x_max, float y_min, float y_max){
-    //#pragma omp parallel for
+    //#pragma omp parallel for num_threads(BOIDS_COUNT)
     for(int i = 0; i < size; i++){
         boids[i].position += boids[i].direction * timeStep;
         if(boids[i].position[0] < x_min){
@@ -47,11 +49,15 @@ void move_boids(boid* boids, int size, double timeStep, float x_min, float x_max
 }
 
 void influence_boids(boid* boids, int size, double timeStep){
-
+    //#pragma omp parallel for num_threads(BOIDS_COUNT)
+    
+    for(int i = 0; i < size; i++){
+        
+    }
 }
 
-//Rotation 115 degrees clockwise
-//115 degrees ~= 2 Radians
+//Rotation 165 degrees clockwise
+//165 degrees ~= 2 Radians
 
 
 void draw_boids(boid* boids, int boids_count, float size){
@@ -59,14 +65,14 @@ void draw_boids(boid* boids, int boids_count, float size){
     vec2 nose;
     vec2 leftWing; 
     vec2 rightWing;
-    vec2 rotationTransformL_1 = {cos(2.88), -sin(2.88)};
-    vec2 rotationTransformL_2 = {sin(2.88), cos(2.88)};
-    vec2 rotationTransformR_1 = {cos(2.88), sin(2.88)};
-    vec2 rotationTransformR_2 = {-sin(2.88), cos(2.88)};
+    vec2 rotationTransformL_1 = {cos(BOID_DRAW_ANGLE_RADIANS), -sin(BOID_DRAW_ANGLE_RADIANS)};
+    vec2 rotationTransformL_2 = {sin(BOID_DRAW_ANGLE_RADIANS), cos(BOID_DRAW_ANGLE_RADIANS)};
+    vec2 rotationTransformR_1 = {cos(-BOID_DRAW_ANGLE_RADIANS), -sin(-BOID_DRAW_ANGLE_RADIANS)};
+    vec2 rotationTransformR_2 = {sin(-BOID_DRAW_ANGLE_RADIANS), cos(-BOID_DRAW_ANGLE_RADIANS)};
     
     for(int i = 0; i < boids_count; i++){
         center = boids[i].position;
-        nose = boids[i].position + (boids[i].direction * size);
+        nose = center + (boids[i].direction * size);
         leftWing = center + (size * vec2(dot(rotationTransformL_1, boids[i].direction), dot(rotationTransformL_2, boids[i].direction)));
         rightWing = center + (size * vec2(dot(rotationTransformR_1, boids[i].direction), dot(rotationTransformR_2, boids[i].direction)));
         
@@ -76,8 +82,8 @@ void draw_boids(boid* boids, int boids_count, float size){
         glVertex2d(nose[0], nose[1]);
         glVertex2d(center[0], center[1]);
         glVertex2d(rightWing[0], rightWing[1]);
-
-        glEnd();
+        
+        glEnd(); 
     }
 }
 

@@ -4,28 +4,21 @@
 #include <GL/glut.h>
 #include "boids.h"
 #include "vec.h"
+#include "constants.h"
 
-
-
-boid* the_boids;
-const int BOIDS_COUNT = 100;
-
-const float WORLD_X_MIN = -20;
-const float WORLD_X_MAX = 20;
-
-const float WORLD_Y_MIN = -11.25;
-const float WORLD_Y_MAX = 11.25;
+int count = 0;
 
 void init(){
 
     the_boids = new boid[BOIDS_COUNT];
     randomize_boids(the_boids, BOIDS_COUNT, WORLD_X_MIN, WORLD_X_MAX, WORLD_Y_MIN, WORLD_Y_MAX);
+
     // making background color black as first
     // 3 arguments all are 0.0
-    glClearColor(0.0, 0.0, 0.0, 1.0);
+    glClearColor(1.0, 1.0, 1.0, 1.0);
      
     // making picture color green (in RGB mode), as middle argument is 1.0
-    glColor3f(1.0, 0.0, 0.0);
+    glColor3f(0.5, 0.75, 0.8);
      
     // breadth of picture boundary is 1 pixel
     glPointSize(1.0);
@@ -42,11 +35,11 @@ void display(){
     
     draw_boids(the_boids, BOIDS_COUNT, .5);
     
-    
     glutSwapBuffers();
 }
 
 void update(){
+    
     influence_boids(the_boids, BOIDS_COUNT, .01);
     move_boids(the_boids, BOIDS_COUNT, .01, WORLD_X_MIN, WORLD_X_MAX, WORLD_Y_MIN, WORLD_Y_MAX);
     glutPostRedisplay();

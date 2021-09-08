@@ -3,19 +3,11 @@
 #include <GL/glu.h>
 #include "gl_func.h"
 #include "boids.h"
-
-const int SCREEN_WIDTH = 768;
-const int SCREEN_HEIGHT = 480;
-
+#include "constants.h"
 
 
 int main(int argc, char** argv){
-    // SDL_Window* gWindow = nullptr;
-    // SDL_Renderer* gRenderer = nullptr;
     
-    // init_sdl(SCREEN_WIDTH,SCREEN_HEIGHT,gWindow, gRenderer);
-    // SDL_Delay(2000);
-
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
      
