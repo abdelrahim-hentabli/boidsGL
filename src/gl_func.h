@@ -32,7 +32,7 @@ void display(){
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    draw_boids(the_boids, BOIDS_COUNT, .5);
+    draw_boids(the_boids, BOIDS_COUNT, 1);
     
     glutSwapBuffers();
 }

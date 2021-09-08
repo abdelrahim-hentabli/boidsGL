@@ -91,6 +91,13 @@ struct vec
     return output;
   }
 
+  friend vec<T, n> operator /(const T& lhs, const vec<T,n>& rhs){
+    vec<T, n> output;
+    for(int i = 0; i < n; i++){output.x[i] = lhs / rhs.x[i];}
+    return output;
+  }
+  
+
   vec<T, 3> operator *(const vec<T,3>& rhs){
     vec<T,3> output;
     output.x[0] = x[1] * rhs.x[2] - (x[2] * rhs.x[1]);
@@ -115,6 +122,16 @@ struct vec
 
   vec<T, n> operator -=(const vec<T,n>& rhs){
     for(int i = 0; i < n; i++){x[i] = x[i] - rhs.x[i];}
+    return *this;
+  }
+
+  vec<T,n> operator /=(const T& rhs){
+    for(int i = 0; i < n; i++){x[i] /= rhs;}
+    return *this;
+  }
+
+  vec<T,n> operator *=(const T& rhs){
+    for(int i = 0; i < n; i++){x[i] *= rhs;}
     return *this;
   }
 
