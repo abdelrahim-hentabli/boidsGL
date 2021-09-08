@@ -6,7 +6,6 @@
 #include "vec.h"
 #include "constants.h"
 
-int count = 0;
 
 void init(){
 
@@ -39,7 +38,7 @@ void display(){
 }
 
 void update(){
-    
+
     influence_boids(the_boids, BOIDS_COUNT, .01);
     move_boids(the_boids, BOIDS_COUNT, .01, WORLD_X_MIN, WORLD_X_MAX, WORLD_Y_MIN, WORLD_Y_MAX);
     glutPostRedisplay();

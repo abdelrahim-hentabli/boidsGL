@@ -91,11 +91,19 @@ struct vec
     return output;
   }
 
-  vec<T, n> operator *(const vec<T,n>& rhs){
-    assert(n==3);
+  vec<T, 3> operator *(const vec<T,3>& rhs){
     vec<T,3> output;
     output.x[0] = x[1] * rhs.x[2] - (x[2] * rhs.x[1]);
     output.x[1] = x[2] * rhs.x[0] - (x[0] * rhs.x[2]);
+    output.x[2] = x[0] * rhs.x[1] - (x[1] * rhs.x[0]);
+    return output;
+  }
+
+  vec<T, 3> operator *(const vec<T,2>& rhs){
+    assert (n == 2);
+    vec<T,3> output;
+    output.x[0] = 0;
+    output.x[1] = 0;
     output.x[2] = x[0] * rhs.x[1] - (x[1] * rhs.x[0]);
     return output;
   }
