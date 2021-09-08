@@ -128,7 +128,7 @@ struct vec
 };
 
 template<class T, int n> T dot(const vec<T,n>& v, const vec<T,n>& u){
-  T sum;
+  T sum = 0;
   for(int i = 0; i < n; i++){
     sum += v.x[i] * u.x[i];
   }
