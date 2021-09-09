@@ -124,6 +124,9 @@ void influence_boids(boid* boids, int size, double timeStep){
             else if(WORLD_Y_MAX - boids[i].position[1] < OBS_AVOID_DIST){
                 boids[i].acceleration[1] += OBS_AVOID_WEIGHT * OBS_AVOID_DIST /(boids[i].position[1] - WORLD_Y_MAX);
             }
+            if(!double_equality(boids[i].acceleration.magnitude(), 0.0)){
+                boids[i].acceleration.normalize();
+            }
         }
     }
 }
