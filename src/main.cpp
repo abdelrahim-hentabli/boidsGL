@@ -7,7 +7,24 @@
 
 
 int main(int argc, char** argv){
-    
+    if(argc == 7){
+        try{
+            BOIDS_COUNT = std::stoi(argv[1]);
+            assert(BOIDS_COUNT > 0);
+            threads = std::stoi(argv[2]);
+            assert(threads > 0);
+            SEPERATION_WEIGHT = std::stof(argv[3]);
+            ALIGNMENT_WEIGHT = std::stof(argv[4]);
+            COHESION_WEIGHT = std::stof(argv[5]);
+            OBS_AVOID_WEIGHT = std::stof(argv[6]);
+            
+        }
+        catch(std::exception const &e){
+            std::cout<<"Usage: boids <# of boids> <# threads> <alignment weight> <cohesion weight> <seperation weight> <obs avoidance weight>\n";
+            return 1;
+        }
+    }
+
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
      

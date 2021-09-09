@@ -17,11 +17,11 @@ void init(){
     srand(time(NULL));
     randomize_boids(the_boids, BOIDS_COUNT, WORLD_X_MIN, WORLD_X_MAX, WORLD_Y_MIN, WORLD_Y_MAX);
 
-    // making background color black as first
-    // 3 arguments all are 0.0
+    // making background color white as first
+    // 3 arguments all are 1.0
     glClearColor(1.0, 1.0, 1.0, 1.0);
      
-    // making picture color green (in RGB mode), as middle argument is 1.0
+    // making picture color turqoise
     glColor3f(0.5, 0.75, 0.8);
      
     // breadth of picture boundary is 1 pixel
