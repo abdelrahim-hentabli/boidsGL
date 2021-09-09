@@ -25,7 +25,7 @@ const float OBS_AVOID_DIST = 3;
 const float ALIGNMENT_WEIGHT = 1;
 const float COHESION_WEIGHT = 1;
 const float SEPERATION_WEIGHT = 1;
-const float OBS_AVOID_WEIGHT = 0;
+const float OBS_AVOID_WEIGHT = 1.2;
 
 const float WORLD_X_MIN = -40;
 const float WORLD_X_MAX = 40;
