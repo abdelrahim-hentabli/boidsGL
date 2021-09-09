@@ -20,7 +20,7 @@ int main(int argc, char** argv){
             
         }
         catch(std::exception const &e){
-            std::cout<<"Usage: boids <# of boids> <# threads> <alignment weight> <cohesion weight> <seperation weight> <obs avoidance weight>\n";
+            std::cout<<"Usage: ./boids <# of boids> <# threads> <seperation weight> <alignment weight> <cohesion weight> <obs avoidance weight>\n";
             return 1;
         }
     }
