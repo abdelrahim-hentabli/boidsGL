@@ -13,6 +13,10 @@ include_directories(${OPENGL_INCLUDE_DIRS} ${GLUT_INCLUDE_DIRS})
 
 ADD_SUBDIRECTORY(./src ../bin)
 
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(timingMP PUBLIC OpenMP::OpenMP_CXX)
+endif()
+
 if(OpenMP_CXX_FOUND AND OPENGL_FOUND)
     target_link_libraries(boids PUBLIC OpenMP::OpenMP_CXX ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
 endif()
