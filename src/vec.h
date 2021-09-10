@@ -99,6 +99,7 @@ struct vec
   
 
   vec<T, 3> operator *(const vec<T,3>& rhs){
+    assert (n == 3);
     vec<T,3> output;
     output.x[0] = x[1] * rhs.x[2] - (x[2] * rhs.x[1]);
     output.x[1] = x[2] * rhs.x[0] - (x[0] * rhs.x[2]);

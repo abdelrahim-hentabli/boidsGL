@@ -9,7 +9,7 @@
 
 struct boid{
     vec2 position;
-    vec2 direction;
+    vec2 velocity;
     vec2 acceleration;
     
 };
@@ -24,7 +24,7 @@ float randomFloat(float min, float max){
 void randomize_boids(boid* boids, int size, float x_min, float x_max, float y_min, float y_max){
     for(int i = 0; i < size; i++){
         boids[i].position = vec2(randomFloat(x_min, x_max), randomFloat(x_min, x_max));
-        boids[i].direction = (vec2(randomFloat(x_min, x_max), randomFloat(x_min, x_max)) - boids[i].position).normalize();
+        boids[i].velocity = (vec2(randomFloat(x_min, x_max), randomFloat(x_min, x_max)) - boids[i].position).normalize();
     }
 }
 
@@ -34,14 +34,14 @@ void move_boids(boid* boids, int size, double timeStep, float x_min, float x_max
     #endif
     for(int i = 0; i < size; i++){
     
-        boids[i].direction += (boids[i].acceleration * timeStep);
-        if(boids[i].direction.magnitude() > 1.5){
-            boids[i].direction = boids[i].direction.normalize() * 1.5;
+        boids[i].velocity += (boids[i].acceleration * timeStep);
+        if(boids[i].velocity.magnitude() > 1.5){
+            boids[i].velocity = boids[i].velocity.normalize() * 1.5;
         }
-        else if(boids[i].direction.magnitude() < .5){
-            boids[i].direction = boids[i].direction.normalize() * .5;
+        else if(boids[i].velocity.magnitude() < .5){
+            boids[i].velocity = boids[i].velocity.normalize() * .5;
         }
-        boids[i].position += boids[i].direction * timeStep;
+        boids[i].position += boids[i].velocity * timeStep;
 
         //if off edge of screen, go to other side of screen
         if(boids[i].position[0] < x_min){
@@ -79,9 +79,9 @@ void influence_boids(boid* boids, int size, double timeStep){
             if(i != j){
                 vecToNeighbor = boids[j].position - boids[i].position;
                 if(vecToNeighbor.magnitude() < BOID_VIEW_DIST){
-                    if(acos(dot(boids[i].direction, vecToNeighbor) / boids[i].direction.magnitude() / vecToNeighbor.magnitude()) <= BOID_VIEW_ANGLE_RADIANS){
+                    if(acos(dot(boids[i].velocity, vecToNeighbor) / boids[i].velocity.magnitude() / vecToNeighbor.magnitude()) <= BOID_VIEW_ANGLE_RADIANS){
                         neighbors++;
-                        flockHeading += boids[j].direction;
+                        flockHeading += boids[j].velocity;
                         flockCenter += boids[j].position;
                         if(vecToNeighbor.magnitude() < BOID_AVOID_DIST){
                             seperation -= vecToNeighbor.normalize();
@@ -89,7 +89,8 @@ void influence_boids(boid* boids, int size, double timeStep){
                     }
                 }
             }
-            if(neighbors > 0){
+        }
+        if(neighbors > 0){
                 //Alignment Force
                 vec2 alignmentForce = (flockHeading / neighbors);
                 if(alignmentForce.magnitude() > 1){
@@ -105,7 +106,7 @@ void influence_boids(boid* boids, int size, double timeStep){
                 boids[i].acceleration += COHESION_WEIGHT * cohesionForce;
                 
                 //Seperation Force
-                vec2 seperationForce = (seperation + boids[i].direction);
+                vec2 seperationForce = (seperation + boids[i].velocity);
                 if(seperationForce.magnitude() > 1){
                     seperationForce = seperationForce.normalize();
                 }
@@ -127,7 +128,6 @@ void influence_boids(boid* boids, int size, double timeStep){
             if(boids[i].acceleration.magnitude() > 1.0){
                 boids[i].acceleration.normalize();
             }
-        }
     }
 }
 

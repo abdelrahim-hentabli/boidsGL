@@ -55,9 +55,9 @@ void draw_boids(boid* boids, int boids_count, float size){
     
     for(int i = 0; i < boids_count; i++){
         center = boids[i].position;
-        nose = center + (boids[i].direction * size).normalize();
-        leftWing = center + (size * .75 * vec2(dot(rotationTransformL_1, boids[i].direction), dot(rotationTransformL_2, boids[i].direction)).normalize());
-        rightWing = center + (size * .75 * vec2(dot(rotationTransformR_1, boids[i].direction), dot(rotationTransformR_2, boids[i].direction)).normalize());
+        nose = center + (boids[i].velocity * size).normalize();
+        leftWing = center + (size * .75 * vec2(dot(rotationTransformL_1, boids[i].velocity), dot(rotationTransformL_2, boids[i].velocity)).normalize());
+        rightWing = center + (size * .75 * vec2(dot(rotationTransformR_1, boids[i].velocity), dot(rotationTransformR_2, boids[i].velocity)).normalize());
         
         glBegin(GL_TRIANGLE_STRIP);
 
@@ -72,8 +72,8 @@ void draw_boids(boid* boids, int boids_count, float size){
 
 void update(){
 
-    influence_boids(the_boids, BOIDS_COUNT, .01);
-    move_boids(the_boids, BOIDS_COUNT, .01, WORLD_X_MIN, WORLD_X_MAX, WORLD_Y_MIN, WORLD_Y_MAX);
+    influence_boids(the_boids, BOIDS_COUNT, TIMING);
+    move_boids(the_boids, BOIDS_COUNT, TIMING, WORLD_X_MIN, WORLD_X_MAX, WORLD_Y_MIN, WORLD_Y_MAX);
     glutPostRedisplay();
 }
 

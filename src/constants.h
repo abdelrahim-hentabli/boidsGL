@@ -6,7 +6,7 @@ struct boid;
 const float PI = 3.14159f;
 
 boid* the_boids;
-int BOIDS_COUNT = 50;
+int BOIDS_COUNT = 100;
 
 int threads = 8;
 
@@ -23,7 +23,7 @@ const float BOID_AVOID_DIST_SQR = BOID_AVOID_DIST * BOID_AVOID_DIST;
 const float OBS_AVOID_DIST = 3;
 
 float ALIGNMENT_WEIGHT = 1;
-float COHESION_WEIGHT = 1;
+float COHESION_WEIGHT = .75;
 float SEPERATION_WEIGHT = 1;
 float OBS_AVOID_WEIGHT = 1;
 
@@ -40,6 +40,6 @@ const int SCREEN_HEIGHT = 480;
 const float BOID_DRAW_ANGLE_DEGREES = 125;
 const float BOID_DRAW_ANGLE_RADIANS = BOID_DRAW_ANGLE_DEGREES * PI / 180.0;
 
-
+const float TIMING = .01;
 
 #endif //CONSTANTS_H

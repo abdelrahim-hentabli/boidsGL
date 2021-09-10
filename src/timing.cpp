@@ -36,6 +36,6 @@ int main(int argc, char** argv){
         influence_boids(boids, boid_amount, 1);
         move_boids(boids, boid_amount, 1, WORLD_X_MIN, WORLD_X_MAX, WORLD_Y_MIN, WORLD_Y_MAX);
     }
-    std::cout<<boids[0].position<<'\n'<<boids[0].direction<<'\n'<<boids[0].acceleration<<"\n\n";
+    std::cout<<"Position:     "<<boids[0].position<<'\n'<<"Direction:    "<<boids[0].velocity<<'\n'<<"Acceleration: "<<boids[0].acceleration<<"\n\n";
     return 0;
 }
