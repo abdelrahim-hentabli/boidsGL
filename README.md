@@ -25,17 +25,3 @@ Timing and testing can be done with the  ```./timing``` and ```./timingMP``` com
 
 ## Current State
 ![Boids Preview](/imgs/boids_preview.gif?raw=true "Boids")
-
-## Project Motivation and References
-
-<a href="https://www.youtube.com/watch?feature=player_embedded&v=4LWmRuB-uNU" target="_blank"><img src="https://img.youtube.com/vi/4LWmRuB-uNU/0.jpg" alt="How Birds Do the Thing - Smarter Every Day 234"/></a>
-### How Birds Do the Thing - Smarter Every Day 234
-
-
-<a href="https://www.youtube.com/watch?feature=player_embedded&v=bqtqltqcQhw" target="_blank"><img src="https://img.youtube.com/vi/bqtqltqcQhw/0.jpg" alt="Coding Adventure: Boids"/></a>
-### Coding Adventure: Boids
-
-### [Flocks, Herds, and Schools: A Distributed Behavioral Model](http://www.cs.toronto.edu/~dt/siggraph97-course/cwr87/)
-
-### [Boids Background and Update](http://www.red3d.com/cwr/boids/)
-
