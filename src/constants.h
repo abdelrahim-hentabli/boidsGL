@@ -8,7 +8,7 @@ const float PI = 3.14159f;
 boid* the_boids;
 int BOIDS_COUNT = 100;
 
-int threads = 8;
+int threads = 64;
 
 //angle from forward that a boid can see, actual vision size = 2 * BOID_VIEW_ANGLE
 const float BOID_VIEW_ANGLE_DEGREES = 120;

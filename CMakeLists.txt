@@ -17,7 +17,11 @@ if(OpenMP_CXX_FOUND)
     target_link_libraries(timingMP PUBLIC OpenMP::OpenMP_CXX)
 endif()
 
+if(OPENGL_FOUND)
+    target_link_libraries(boids PUBLIC ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
+endif()
+
 if(OpenMP_CXX_FOUND AND OPENGL_FOUND)
-    target_link_libraries(boids PUBLIC OpenMP::OpenMP_CXX ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
+    target_link_libraries(boidsMP PUBLIC OpenMP::OpenMP_CXX ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
 endif()
 

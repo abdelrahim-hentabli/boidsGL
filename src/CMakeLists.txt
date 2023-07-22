@@ -1,3 +1,7 @@
+ADD_EXECUTABLE(boidsMP
+    main.cpp
+)
+
 ADD_EXECUTABLE(boids
     main.cpp
 )

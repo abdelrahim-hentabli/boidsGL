@@ -1,7 +1,11 @@
 #ifndef SDL_FUNC_H
 #define SDL_FUNC_H
 
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
 #include <GL/glut.h>
+#endif
 #include "boids.h"
 #include "vec.h"
 #include "constants.h"

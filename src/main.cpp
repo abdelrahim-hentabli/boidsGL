@@ -1,6 +1,9 @@
 #include <iostream>
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
 #include <GL/glut.h>
-#include <GL/glu.h>
+#endif
 #include "gl_func.h"
 #include "boids.h"
 #include "constants.h"
