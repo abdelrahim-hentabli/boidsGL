@@ -17,9 +17,8 @@ void update();
 
 void init(){
 
-    the_boids = new boid[BOIDS_COUNT];
-    srand(time(NULL));
-    randomize_boids(the_boids, BOIDS_COUNT, WORLD_X_MIN, WORLD_X_MAX, WORLD_Y_MIN, WORLD_Y_MAX);
+    the_boids = nullptr;
+    init_boids(the_boids, BOIDS_COUNT, WORLD_X_MIN, WORLD_X_MAX, WORLD_Y_MIN, WORLD_Y_MAX);
 
     // making background color white as first
     // 3 arguments all are 1.0
