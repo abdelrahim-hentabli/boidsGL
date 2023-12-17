@@ -1,4 +1,4 @@
-#include "boids.h"
+#include "boids.hpp"
 
 void init_boids (boid* &boids, int size, float x_min, float x_max, float y_min, float y_max){
     boids = new boid[size];
@@ -37,7 +37,7 @@ void move_boids(boid* boids, int size, double timeStep, float x_min, float x_max
     }
 }
 
-void influence_boids(boid* boids, int size, double timeStep){
+void influence_boids(boid* boids, int size, double timeStep, float a_weight, float c_weight, float s_weight, float o_a_weight){
     
     #ifdef _OPENMP
     #pragma omp parallel for num_threads(threads)
@@ -74,34 +74,34 @@ void influence_boids(boid* boids, int size, double timeStep){
                 if(alignmentForce.magnitude() > 1){
                     alignmentForce = alignmentForce.normalize();
                 }
-                boids[i].acceleration += ALIGNMENT_WEIGHT * (flockHeading / neighbors);
+                boids[i].acceleration += a_weight * (flockHeading / neighbors);
 
                 //Cohesion Force
                 vec2 cohesionForce = ((flockCenter / neighbors) -boids[i].position);
                 if(cohesionForce.magnitude() > 1){
                     cohesionForce = cohesionForce.normalize();
                 }
-                boids[i].acceleration += COHESION_WEIGHT * cohesionForce;
+                boids[i].acceleration += c_weight * cohesionForce;
                 
                 //Seperation Force
                 vec2 seperationForce = (seperation + boids[i].velocity);
                 if(seperationForce.magnitude() > 1){
                     seperationForce = seperationForce.normalize();
                 }
-                boids[i].acceleration += SEPERATION_WEIGHT * seperationForce;
+                boids[i].acceleration += s_weight * seperationForce;
                 
             }
             if(boids[i].position[0] - WORLD_X_MIN < OBS_AVOID_DIST){
-                boids[i].acceleration[0] += OBS_AVOID_WEIGHT * OBS_AVOID_DIST / (boids[i].position[0] - WORLD_X_MIN);
+                boids[i].acceleration[0] += o_a_weight * OBS_AVOID_DIST / (boids[i].position[0] - WORLD_X_MIN);
             }
             else if(WORLD_X_MAX - boids[i].position[0] < OBS_AVOID_DIST){
-                boids[i].acceleration[0] += OBS_AVOID_WEIGHT * OBS_AVOID_DIST /(boids[i].position[0] - WORLD_X_MAX);
+                boids[i].acceleration[0] += o_a_weight * OBS_AVOID_DIST /(boids[i].position[0] - WORLD_X_MAX);
             }
             if(boids[i].position[1] - WORLD_Y_MIN < OBS_AVOID_DIST){
-                boids[i].acceleration[1] += OBS_AVOID_WEIGHT * OBS_AVOID_DIST /(boids[i].position[1] - WORLD_Y_MIN);
+                boids[i].acceleration[1] += o_a_weight * OBS_AVOID_DIST /(boids[i].position[1] - WORLD_Y_MIN);
             }
             else if(WORLD_Y_MAX - boids[i].position[1] < OBS_AVOID_DIST){
-                boids[i].acceleration[1] += OBS_AVOID_WEIGHT * OBS_AVOID_DIST /(boids[i].position[1] - WORLD_Y_MAX);
+                boids[i].acceleration[1] += o_a_weight * OBS_AVOID_DIST /(boids[i].position[1] - WORLD_Y_MAX);
             }
             if(boids[i].acceleration.magnitude() > 1.0){
                 boids[i].acceleration.normalize();

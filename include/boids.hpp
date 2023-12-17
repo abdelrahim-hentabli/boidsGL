@@ -1,11 +1,11 @@
 #ifndef BOIDS_H
 #define BOIDS_H
 
-#include "vec.h"
+#include "vec.hpp"
 #include <math.h>
 #include <random>
 #include <assert.h>
-#include "constants.h"
+#include "constants.hpp"
 
 struct boid{
     vec2 position;

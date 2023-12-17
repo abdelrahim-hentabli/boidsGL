@@ -1,13 +1,13 @@
 #include <iostream>
 #ifdef __APPLE__
+#define GL_SILENCE_DEPRECATION
 #include <GLUT/glut.h>
 #else
 #include <GL/glut.h>
 #endif
-#include "gl_func.h"
-#include "boids.h"
-#include "constants.h"
-
+#include "gl_func.hpp"
+#include "boids.hpp"
+#include "constants.hpp"
 
 int main(int argc, char** argv){
     if(argc == 7){

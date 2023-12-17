@@ -1,6 +1,6 @@
 #include <iostream>
 #include "boids.h"
-#include "constants.h"
+#include "constants.hpp"
 
 int main(int argc, char** argv){
     if(argc < 3){
@@ -29,7 +29,10 @@ int main(int argc, char** argv){
         }
     }
     srand(42);
-
+    float alignment_weight  = DEFAULT_ALIGNMENT_WEIGHT;
+    float cohesion_weight   = DEFAULT_COHESION_WEIGHT;
+    float seperation_weight = DEFAULT_SEPERATION_WEIGHT;
+    float obs_aviod_weight  = DEFAULT_OBS_AVOID_WEIGHT
     boid* boids = new boid[boid_amount];
     randomize_boids(boids, boid_amount, WORLD_X_MIN, WORLD_X_MAX, WORLD_Y_MIN, WORLD_Y_MAX);
     for(int i = 0; i < steps; i++){

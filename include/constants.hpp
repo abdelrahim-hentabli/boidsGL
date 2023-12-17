@@ -5,10 +5,9 @@ struct boid;
 
 const float PI = 3.14159f;
 
-boid* the_boids;
-int BOIDS_COUNT = 100;
+const int DEFAULT_BOIDS_COUNT = 100;
 
-int threads = 64;
+const int threads = 64;
 
 //angle from forward that a boid can see, actual vision size = 2 * BOID_VIEW_ANGLE
 const float BOID_VIEW_ANGLE_DEGREES = 120;
@@ -22,10 +21,10 @@ const float BOID_AVOID_DIST_SQR = BOID_AVOID_DIST * BOID_AVOID_DIST;
 
 const float OBS_AVOID_DIST = 3;
 
-float ALIGNMENT_WEIGHT = 1;
-float COHESION_WEIGHT = .75;
-float SEPERATION_WEIGHT = 1;
-float OBS_AVOID_WEIGHT = 1;
+const float DEFAULT_ALIGNMENT_WEIGHT = 1;
+const float DEFAULT_COHESION_WEIGHT = .75;
+const float DEFAULT_SEPERATION_WEIGHT = 1;
+const float DEFAULT_OBS_AVOID_WEIGHT = 1;
 
 const float WORLD_X_MIN = -40;
 const float WORLD_X_MAX = 40;

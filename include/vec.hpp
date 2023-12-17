@@ -169,4 +169,4 @@ typedef vec<int, 2> ivec2;
 typedef vec<int, 3> ivec3;
 typedef vec<int, 4> ivec4;
 
-#endif //VEC
+#endif //VEC_H
